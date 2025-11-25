@@ -14,7 +14,7 @@
 </head>
 <body>
   <h1>Kalkulator Fotowoltaiczny (PV)</h1>
-  <p>Wprowadź miesięczny rachunek za prąd oraz wybierz typ obiektu i moc instalacji.</p>
+  <p>Wprowadź miesięczny rachunek za prąd, wybierz typ obiektu, miejsce montażu oraz moc instalacji.</p>
 
   <label>Miesięczny rachunek za prąd (zł):
     <input id="bill" type="number" placeholder="np. 300" />
@@ -25,6 +25,20 @@
       <option value="dom">Dom jednorodzinny</option>
       <option value="firma">Firma</option>
       <option value="gospodarstwo">Gospodarstwo rolne</option>
+    </select>
+  </label>
+
+  <label>Miejsce montażu:
+    <select id="mount" onchange="toggleRoofType()">
+      <option value="dach">Dach</option>
+      <option value="grunt">Grunt</option>
+    </select>
+  </label>
+
+  <label id="roofTypeLabel">Rodzaj pokrycia dachu:
+    <select id="roofType">
+      <option value="blacha">Blacha</option>
+      <option value="dachowka">Dachówka</option>
     </select>
   </label>
 
@@ -40,6 +54,8 @@
     function calculate() {
       const bill = parseFloat(document.getElementById('bill').value);
       const type = document.getElementById('type').value;
+      const mount = document.getElementById('mount').value;
+      const roofType = document.getElementById('roofType')?.value;
       const power = parseFloat(document.getElementById('power').value);
 
       if (!bill || !power) {
@@ -47,8 +63,23 @@
         return;
       }
 
-      document.getElementById('result').innerText = 
-        `Rachunek: ${bill} zł/mies., Obiekt: ${type}, Moc instalacji: ${power} kW`;
+      const suggestedPower = (bill / 110).toFixed(2);
+
+      document.getElementById('result').innerText =
+        `Rachunek: ${bill} zł/mies.
+` +
+        `Typ obiektu: ${type}
+` +
+        `Montaż: ${mount}${mount === 'dach' ? ', pokrycie: ' + roofType : ''}
+` +
+        `Wybrana moc: ${power} kW
+` +
+        `Sugerowana moc instalacji: ${suggestedPower} kW`;
+    }
+
+    function toggleRoofType() {
+      const mount = document.getElementById('mount').value;
+      document.getElementById('roofTypeLabel').style.display = mount === 'dach' ? 'block' : 'none';
     }
   </script>
 </body>
