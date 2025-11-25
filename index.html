@@ -42,6 +42,14 @@
     </select>
   </label>
 
+  <label>Turbina wiatrowa:
+    <select id="turbine">
+      <option value="0">Brak turbiny</option>
+      <option value="3">3 kW</option>
+      <option value="6">6 kW</option>
+    </select>
+  </label>
+
   <label>Magazyn energii (kWh):
     <select id="battery">
       <option value="0">Brak magazynu</option>
@@ -91,7 +99,8 @@
         `Wybrana moc: ${power} kW
 ` +
         `Sugerowana moc instalacji: ${suggestedPower} kW
-Magazyn energii: ${document.getElementById('battery').value} kWh`;
+Magazyn energii: ${document.getElementById('battery').value} kWh
+Turbina wiatrowa: ${document.getElementById('turbine').value} kW`;
     }
 
     function toggleRoofType() {
