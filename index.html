@@ -83,7 +83,13 @@
       const power = parseFloat(document.getElementById('power').value);
 
       if (!bill || !power) {
-        document.getElementById('result').innerText = "Uzupełnij wszystkie pola.";
+        // Ceny
+      const pvPrice = power * 2500;
+      const batteryPrice = document.getElementById('battery').value * 1200;
+      const turbineValue = document.getElementById('turbine').value;
+      const turbinePrice = turbineValue === "3" ? 12000 : turbineValue === "6" ? 24000 : 0;
+
+      document.getElementById('result').innerText = "Uzupełnij wszystkie pola.";
         return;
       }
 
@@ -100,7 +106,15 @@
 ` +
         `Sugerowana moc instalacji: ${suggestedPower} kW
 Magazyn energii: ${document.getElementById('battery').value} kWh
-Turbina wiatrowa: ${document.getElementById('turbine').value} kW`;
+Turbina wiatrowa: ${turbineValue} kW
+` +
+        `Koszt instalacji PV: ${pvPrice} zł
+` +
+        `Koszt magazynu energii: ${batteryPrice} zł
+` +
+        `Koszt turbiny: ${turbinePrice} zł
+` +
+        `Łączny koszt: ${pvPrice + batteryPrice + turbinePrice} zł`;
     }
 
     function toggleRoofType() {
@@ -110,3 +124,4 @@ Turbina wiatrowa: ${document.getElementById('turbine').value} kW`;
   </script>
 </body>
 </html>
+
