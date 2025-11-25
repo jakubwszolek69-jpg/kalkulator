@@ -50,6 +50,10 @@
     </select>
   </label>
 
+  <label>Rabat / Marża (%):
+    <input id="margin" type="number" placeholder="np. 10" />
+  </label>
+
   <label>Magazyn energii (kWh):
     <select id="battery">
       <option value="0">Brak magazynu</option>
@@ -106,7 +110,8 @@ Turbina wiatrowa: ${turbine} kW
 Koszt instalacji PV: ${pvPrice} zł
 Koszt magazynu energii: ${batteryPrice} zł
 Koszt turbiny: ${turbinePrice} zł
-Łączny koszt: ${total} zł`;
+Łączny koszt: ${total} zł
+Cena po rabacie / marży: ${(total - (total * (parseFloat(document.getElementById('margin').value)||0) / 100)).toFixed(2)`;
     }
 
     function toggleRoofType() {
@@ -116,5 +121,3 @@ Koszt turbiny: ${turbinePrice} zł
   </script>
 </body>
 </html>
-
-
