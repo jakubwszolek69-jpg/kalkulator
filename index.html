@@ -42,6 +42,22 @@
     </select>
   </label>
 
+  <label>Magazyn energii (kWh):
+    <select id="battery">
+      <option value="0">Brak magazynu</option>
+      <option value="5">5 kWh</option>
+      <option value="10">10 kWh</option>
+      <option value="15">15 kWh</option>
+      <option value="20">20 kWh</option>
+      <option value="25">25 kWh</option>
+      <option value="30">30 kWh</option>
+      <option value="35">35 kWh</option>
+      <option value="40">40 kWh</option>
+      <option value="45">45 kWh</option>
+      <option value="50">50 kWh</option>
+    </select>
+  </label>
+
   <label>Wybrana moc instalacji (kW):
     <input id="power" type="number" placeholder="np. 5" />
   </label>
@@ -63,7 +79,7 @@
         return;
       }
 
-      const suggestedPower = (bill / 110).toFixed(2);
+      const suggestedPower = (bill * 0.0225).toFixed(2);
 
       document.getElementById('result').innerText =
         `Rachunek: ${bill} zł/mies.
@@ -74,7 +90,8 @@
 ` +
         `Wybrana moc: ${power} kW
 ` +
-        `Sugerowana moc instalacji: ${suggestedPower} kW`;
+        `Sugerowana moc instalacji: ${suggestedPower} kW
+Magazyn energii: ${document.getElementById('battery').value} kWh`;
     }
 
     function toggleRoofType() {
