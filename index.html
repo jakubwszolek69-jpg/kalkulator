@@ -14,18 +14,22 @@
 </head>
 <body>
   <h1>Kalkulator Fotowoltaiczny (PV)</h1>
-  <p>Prosty kalkulator szacujący wymaganą moc instalacji fotowoltaicznej na podstawie rocznego zużycia energii.</p>
+  <p>Wprowadź miesięczny rachunek za prąd oraz wybierz typ obiektu i moc instalacji.</p>
 
-  <label>Roczne zużycie energii (kWh):
-    <input id="consumption" type="number" placeholder="np. 5000" />
+  <label>Miesięczny rachunek za prąd (zł):
+    <input id="bill" type="number" placeholder="np. 300" />
   </label>
 
-  <label>Nasłonecznienie w Twoim regionie (kWh/kWp rocznie):
-    <input id="irradiation" type="number" placeholder="np. 1000" />
+  <label>Typ obiektu:
+    <select id="type">
+      <option value="dom">Dom jednorodzinny</option>
+      <option value="firma">Firma</option>
+      <option value="gospodarstwo">Gospodarstwo rolne</option>
+    </select>
   </label>
 
-  <label>Sprawność systemu (%)
-    <input id="eff" type="number" placeholder="np. 80" />
+  <label>Wybrana moc instalacji (kW):
+    <input id="power" type="number" placeholder="np. 5" />
   </label>
 
   <button onclick="calculate()">Oblicz</button>
@@ -34,17 +38,17 @@
 
   <script>
     function calculate() {
-      const consumption = parseFloat(document.getElementById('consumption').value);
-      const irradiation = parseFloat(document.getElementById('irradiation').value);
-      const eff = parseFloat(document.getElementById('eff').value) / 100;
+      const bill = parseFloat(document.getElementById('bill').value);
+      const type = document.getElementById('type').value;
+      const power = parseFloat(document.getElementById('power').value);
 
-      if (!consumption || !irradiation || !eff) {
+      if (!bill || !power) {
         document.getElementById('result').innerText = "Uzupełnij wszystkie pola.";
         return;
       }
 
-      const required_kWp = consumption / (irradiation * eff);
-      document.getElementById('result').innerText = `Wymagana moc instalacji: ${required_kWp.toFixed(2)} kWp`;
+      document.getElementById('result').innerText = 
+        `Rachunek: ${bill} zł/mies., Obiekt: ${type}, Moc instalacji: ${power} kW`;
     }
   </script>
 </body>
