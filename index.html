@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalkulator PV</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 40px auto; }
+    label { display: block; margin-top: 16px; }
+    input { width: 100%; padding: 8px; margin-top: 4px; }
+    button { margin-top: 20px; padding: 10px 20px; border-radius: 8px; cursor: pointer; }
+    #result { margin-top: 24px; font-size: 1.2rem; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Kalkulator Fotowoltaiczny (PV)</h1>
+  <p>Prosty kalkulator szacujący wymaganą moc instalacji fotowoltaicznej na podstawie rocznego zużycia energii.</p>
+
+  <label>Roczne zużycie energii (kWh):
+    <input id="consumption" type="number" placeholder="np. 5000" />
+  </label>
+
+  <label>Nasłonecznienie w Twoim regionie (kWh/kWp rocznie):
+    <input id="irradiation" type="number" placeholder="np. 1000" />
+  </label>
+
+  <label>Sprawność systemu (%)
+    <input id="eff" type="number" placeholder="np. 80" />
+  </label>
+
+  <button onclick="calculate()">Oblicz</button>
+
+  <div id="result"></div>
+
+  <script>
+    function calculate() {
+      const consumption = parseFloat(document.getElementById('consumption').value);
+      const irradiation = parseFloat(document.getElementById('irradiation').value);
+      const eff = parseFloat(document.getElementById('eff').value) / 100;
+
+      if (!consumption || !irradiation || !eff) {
+        document.getElementById('result').innerText = "Uzupełnij wszystkie pola.";
+        return;
+      }
+
+      const required_kWp = consumption / (irradiation * eff);
+      document.getElementById('result').innerText = `Wymagana moc instalacji: ${required_kWp.toFixed(2)} kWp`;
+    }
+  </script>
+</body>
+</html>
