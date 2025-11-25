@@ -81,40 +81,32 @@
       const mount = document.getElementById('mount').value;
       const roofType = document.getElementById('roofType')?.value;
       const power = parseFloat(document.getElementById('power').value);
+      const battery = parseFloat(document.getElementById('battery').value);
+      const turbine = document.getElementById('turbine').value;
 
       if (!bill || !power) {
-        // Ceny
-      const pvPrice = power * 2500;
-      const batteryPrice = document.getElementById('battery').value * 1200;
-      const turbineValue = document.getElementById('turbine').value;
-      const turbinePrice = turbineValue === "3" ? 12000 : turbineValue === "6" ? 24000 : 0;
-
-      document.getElementById('result').innerText = "Uzupełnij wszystkie pola.";
+        document.getElementById('result').innerText = "Uzupełnij wszystkie pola.";
         return;
       }
 
       const suggestedPower = (bill * 0.0225).toFixed(2);
 
-      document.getElementById('result').innerText =
-        `Rachunek: ${bill} zł/mies.
-` +
-        `Typ obiektu: ${type}
-` +
-        `Montaż: ${mount}${mount === 'dach' ? ', pokrycie: ' + roofType : ''}
-` +
-        `Wybrana moc: ${power} kW
-` +
-        `Sugerowana moc instalacji: ${suggestedPower} kW
-Magazyn energii: ${document.getElementById('battery').value} kWh
-Turbina wiatrowa: ${turbineValue} kW
-` +
-        `Koszt instalacji PV: ${pvPrice} zł
-` +
-        `Koszt magazynu energii: ${batteryPrice} zł
-` +
-        `Koszt turbiny: ${turbinePrice} zł
-` +
-        `Łączny koszt: ${pvPrice + batteryPrice + turbinePrice} zł`;
+      const pvPrice = power * 2500;
+      const batteryPrice = battery * 1200;
+      const turbinePrice = turbine === "3" ? 12000 : turbine === "6" ? 24000 : 0;
+      const total = pvPrice + batteryPrice + turbinePrice;
+
+      document.getElementById('result').innerText = `Rachunek: ${bill} zł/mies.
+Typ obiektu: ${type}
+Montaż: ${mount}${mount === 'dach' ? ', pokrycie: ' + roofType : ''}
+Wybrana moc: ${power} kW
+Sugerowana moc instalacji: ${suggestedPower} kW
+Magazyn energii: ${battery} kWh
+Turbina wiatrowa: ${turbine} kW
+Koszt instalacji PV: ${pvPrice} zł
+Koszt magazynu energii: ${batteryPrice} zł
+Koszt turbiny: ${turbinePrice} zł
+Łączny koszt: ${total} zł`;
     }
 
     function toggleRoofType() {
@@ -124,4 +116,5 @@ Turbina wiatrowa: ${turbineValue} kW
   </script>
 </body>
 </html>
+
 
