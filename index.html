@@ -50,7 +50,7 @@
     </select>
   </label>
 
-  <label>Rabat / Marża (%):
+  <label>Rabat (zł) (%):
     <input id="margin" type="number" placeholder="np. 10" />
   </label>
 
@@ -111,7 +111,7 @@ Koszt instalacji PV: ${pvPrice} zł
 Koszt magazynu energii: ${batteryPrice} zł
 Koszt turbiny: ${turbinePrice} zł
 Łączny koszt: ${total} zł
-Cena po rabacie / marży: ${(total - (total * (parseFloat(document.getElementById('margin').value)||0) / 100)).toFixed(2)`;
+Cena po rabacie: ${(total - (parseFloat(document.getElementById('margin').value)||0)).toFixed(2)} zł`;
     }
 
     function toggleRoofType() {
