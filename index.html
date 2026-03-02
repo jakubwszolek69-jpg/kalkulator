@@ -121,6 +121,7 @@ Cena po rabacie: ${(total + (parseFloat(document.getElementById('margin').value)
       const mount = document.getElementById('mount').value;
       document.getElementById('roofTypeLabel').style.display = mount === 'dach' ? 'block' : 'none';
     }
+    window.onload = toggleRoofType;
   </script>
 </body>
 </html>
